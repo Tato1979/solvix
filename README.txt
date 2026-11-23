@@ -1,6 +1,13 @@
 PROJETO INTEGRADOR - SOLVIX Sistema de Gestão de Chamados de TI
 Frontend + Backend + SQLite
 
+GRUPO
+Carlos Gustavo Guerra Carvalho
+Tatiana da Costa Hollanda Cavalcanti
+Luan Augusto Marcelino Selan
+Paulo Victor Brito de Paula
+NicksonKleyton Silva Nunes
+
 1.  SOBRE O PROJETO O SOLVIX é um sistema web de gerenciamento de
     chamados de Tecnologia da Informação (TI). Seu objetivo é
     centralizar solicitações de suporte, permitindo registrar chamados,

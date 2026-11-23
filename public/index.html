@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLVIX - Central de Suporte de TI</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon-solvix.png">
+</head>
+<body>
+
+    <div class="layout">
+
+        <!-- Menu lateral -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                <img src="images/logo-solvix-branco.png" alt="Logo Solvix">
+            </div>
+
+
+    <nav class="menu">
+
+        <a href="#dashboard" class="menu-item ativo">
+            <span class="icone-menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m3 10 9-7 9 7"/>
+                    <path d="M5 9v11h14V9"/>
+                    <path d="M9 20v-6h6v6"/>
+                </svg>
+            </span>
+            Dashboard
+        </a>
+
+        <a href="#chamados" class="menu-item">
+            <span class="icone-menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 5h16v14H4z"/>
+                    <path d="M4 9h16"/>
+                    <path d="M8 5v4"/>
+                    <path d="M8 13h8"/>
+                </svg>
+            </span>
+            Chamados
+        </a>
+
+        <a href="#novo-chamado" class="menu-item">
+            <span class="icone-menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"/>
+                    <path d="M12 8v8"/>
+                    <path d="M8 12h8"/>
+                </svg>
+            </span>
+            Novo Chamado
+        </a>
+
+        <a href="#usuarios" class="menu-item">
+            <span class="icone-menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="10" cy="7" r="4"/>
+                    <path d="M20 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+            </span>
+            Usuários
+        </a>
+
+        <a href="#categorias" class="menu-item">
+            <span class="icone-menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3 20 7v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/>
+                    <path d="m9 12 2 2 4-4"/>
+                </svg>
+            </span>
+            Categorias
+        </a>
+
+    </nav>
+
+
+            <!--<div class="sidebar-footer">
+                <span>Conectar. Resolver. Evoluir.</span>
+            </div>-->
+
+        </aside>
+
+        <!-- Conteúdo principal -->
+        <main class="conteudo">
+
+            <!--<header class="topbar">
+                <div>
+                    <h2>Central de Suporte</h2>
+                    <p>Gerencie e acompanhe os chamados de TI</p>
+                </div>
+            </header>-->
+
+        <!-- Tela Dashboard -->
+        <div id="tela-dashboard" class="tela ativa">
+
+            <section class="secao">
+                <h2>Dashboard</h2>
+                <p>Visão geral da Central de Suporte de TI</p>
+
+                <div class="indicadores">
+
+                    <div class="indicador-card">
+                        <span>Total de chamados</span>
+                        <strong id="total-chamados">0</strong>
+                    </div>
+
+                    <div class="indicador-card">
+                        <span>Abertos</span>
+                        <strong id="total-abertos">0</strong>
+                    </div>
+
+                    <div class="indicador-card">
+                        <span>Em andamento</span>
+                        <strong id="total-andamento">0</strong>
+                    </div>
+
+                    <div class="indicador-card">
+                        <span>Resolvidos</span>
+                        <strong id="total-resolvidos">0</strong>
+                    </div>
+
+                </div>
+
+        <!-- GRÁFICOS DO DASHBOARD -->
+        <div class="graficos-dashboard">
+
+            <div class="grafico-card">
+                <h3>Chamados por categoria</h3>
+                <canvas id="grafico-categorias"></canvas>
+            </div>
+
+            <div class="grafico-card">
+                <h3>Chamados por prioridade</h3>
+                <canvas id="grafico-prioridades"></canvas>
+            </div>
+
+            <div class="grafico-card">
+                <h3>Chamados por status</h3>
+                <canvas id="grafico-status"></canvas>
+            </div>
+
+        </div>
+
+            </section>
+
+            <section class="secao">
+                <h2>Chamados recentes</h2>
+                <p>Últimas solicitações cadastradas no sistema</p>
+
+                <div id="chamados-recentes">
+                    Carregando chamados...
+                </div>
+            </section>
+
+        </div>    
+        
+
+        <!-- Tela de usuários -->
+
+<div id="tela-usuarios" class="tela">
+
+    <section class="secao">
+
+        <div class="titulo-listagem">
+            <div>
+                <h2>Usuários</h2>
+                <p>Gerencie os usuários cadastrados no sistema</p>
+            </div>
+
+            <button type="button" id="btn-novo-usuario">
+                <span>+</span> Novo usuário
+            </button>
+        </div>
+
+        <h3 class="subtitulo-secao">Usuários cadastrados</h3>
+
+        <div id="lista-usuarios">
+            Carregando usuários...
+        </div>
+
+    </section>
+
+    <!-- MODAL DE CADASTRO DE USUÁRIO -->
+    <div id="modal-novo-usuario" class="modal">
+
+        <div class="modal-conteudo">
+
+            <div class="modal-cabecalho">
+                <h2>Novo usuário</h2>
+                <button type="button" id="fechar-modal-novo-usuario">×</button>
+            </div>
+
+            <form id="form-usuario">
+
+                <div class="campo">
+                    <label for="nome-usuario">Nome completo</label>
+                    <input
+                        type="text"
+                        id="nome-usuario"
+                        placeholder="Digite o nome"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="email-usuario">E-mail</label>
+                    <input
+                        type="email"
+                        id="email-usuario"
+                        placeholder="Digite o e-mail"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="setor-usuario">Setor</label>
+                    <input
+                        type="text"
+                        id="setor-usuario"
+                        placeholder="Ex: Tecnologia"
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="perfil-usuario">Perfil</label>
+                    <select id="perfil-usuario">
+                        <option value="Usuario">Usuário</option>
+                        <option value="Suporte">Suporte</option>
+                    </select>
+                </div>
+
+                <button type="submit">Cadastrar usuário</button>
+
+            </form>
+
+            <p id="mensagem-usuario"></p>
+
+        </div>
+    </div>
+
+    <!-- MODAL DE EDIÇÃO DE USUÁRIO -->
+    <div id="modal-usuario" class="modal">
+
+        <div class="modal-conteudo">
+
+            <div class="modal-cabecalho">
+                <h2>Editar usuário</h2>
+                <button type="button" id="fechar-modal-usuario">×</button>
+            </div>
+
+            <form id="form-editar-usuario">
+
+                <input type="hidden" id="editar-id">
+
+                <div class="campo">
+                    <label for="editar-nome">Nome</label>
+                    <input type="text" id="editar-nome" required>
+                </div>
+
+                <div class="campo">
+                    <label for="editar-email">E-mail</label>
+                    <input type="email" id="editar-email" required>
+                </div>
+
+                <div class="campo">
+                    <label for="editar-setor">Setor</label>
+                    <input type="text" id="editar-setor">
+                </div>
+
+                <div class="campo">
+                    <label for="editar-perfil">Perfil</label>
+                    <select id="editar-perfil">
+                        <option value="Usuario">Usuário</option>
+                        <option value="Suporte">Suporte</option>
+                    </select>
+                </div>
+
+                <button type="submit">Salvar alterações</button>
+
+            </form>
+
+            <p id="mensagem-editar-usuario"></p>
+
+        </div>
+    </div>
+
+    </div>
+              
+
+        <!-- TELA DE CATEGORIAS -->
+        <div id="tela-categorias" class="tela">
+
+            <section class="secao">
+                <div class="titulo-listagem">
+                    <div>
+                        <h2>Categorias</h2>
+                        <p>Gerencie as categorias de chamados</p>
+                    </div>
+                        <button id="btn-nova-categoria">
+                            <span>+</span> Nova Categoria
+                        </button>                    
+                </div>
+
+        <div id="lista-categorias"></div>
+
+        <!-- MODAL DE NOVA CATEGORIA -->
+        <div id="modal-categoria" class="modal">
+            <div class="modal-conteudo">
+
+                <div class="modal-cabecalho">
+                    <h2>Nova Categoria</h2>
+                    <button type="button" id="fechar-modal-categoria">×</button>
+                </div>
+
+                <form id="form-categoria">
+
+                    <div class="campo">
+                        <label for="nome-categoria">Nome</label>
+                        <input type="text" id="nome-categoria" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="descricao-categoria">Descrição</label>
+                        <textarea id="descricao-categoria" rows="3"></textarea>
+                    </div>
+
+                    <button type="submit">Salvar categoria</button>
+
+                </form>
+
+                <p id="mensagem-categoria"></p>
+
+            </div>
+        </div>
+
+        <!-- MODAL DE EDIÇÃO DE CATEGORIA -->
+        <div id="modal-editar-categoria" class="modal">
+            <div class="modal-conteudo">
+
+                <div class="modal-cabecalho">
+                    <h2>Editar Categoria</h2>
+                    <button type="button" id="fechar-modal-editar-categoria">×</button>
+                </div>
+
+                <form id="form-editar-categoria">
+
+                    <input type="hidden" id="editar-id-categoria">
+
+                    <div class="campo">
+                        <label for="editar-nome-categoria">Nome</label>
+                        <input type="text" id="editar-nome-categoria" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="editar-descricao-categoria">Descrição</label>
+                        <textarea id="editar-descricao-categoria" rows="3"></textarea>
+                    </div>
+
+                    <button type="submit">Salvar alterações</button>
+
+                </form>
+
+                <p id="mensagem-editar-categoria"></p>
+
+            </div>
+        </div>        
+
+            </section>
+
+        </div>        
+
+        <!-- Tela de novo chamado -->
+        <div id="tela-novo-chamado" class="tela">
+            <section id="novo-chamado" class="secao">
+                <h2>Novo chamado</h2>
+                <p>Abrir uma nova solicitação para o TI</p>
+
+                <form id="form-chamado">
+
+                    <div class="campo">
+                        <label for="titulo">Título do chamado</label>
+                        <input
+                            type="text"
+                            id="titulo"
+                            placeholder="Ex: Computador não liga"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="descricao">Descrição do problema</label>
+                        <textarea
+                            id="descricao"
+                            placeholder="Descreva o problema encontrado..."
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div class="campo">
+                        <label for="solicitante">Solicitante</label>
+                        <select id="solicitante" required>
+                            <option value="">Selecione o solicitante</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="categoria">Categoria</label>
+                        <select id="categoria" required>
+                            <option value="">Selecione uma categoria</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="prioridade">Prioridade</label>
+                        <select id="prioridade" required>
+                            <option value="">Selecione a prioridade</option>
+                            <option value="Baixa">Baixa</option>
+                            <option value="Média">Média</option>
+                            <option value="Alta">Alta</option>
+                        </select>
+                    </div>
+
+                    <button type="submit">Abrir chamado</button>
+
+                </form>
+
+                <p id="mensagem-formulario"></p>
+            </section>
+        </div>
+
+            <!-- Listagem de chamados -->
+        <div id="tela-chamados" class="tela ativa">    
+            <section id="chamados" class="secao">
+
+                <div class="titulo-listagem">
+                    <div>
+                        <h2>Chamados</h2>
+                        <p>Gerencie todas as solicitações de TI</p>
+                    </div>
+                </div>
+
+                <!-- Filtros -->
+                <div class="filtros-chamados">
+
+                    <div class="campo-filtro campo-pesquisa">
+                        <label for="pesquisa-chamado">Pesquisar chamado</label>
+
+                        <input
+                            type="text"
+                            id="pesquisa-chamado"
+                            placeholder="Buscar por número, título ou solicitante..."
+                        >
+                    </div>                    
+
+                    <div class="campo-filtro">
+                        <label for="filtro-status">Status</label>
+                        <select id="filtro-status">
+                            <option value="">Todos os status</option>
+                            <option value="Aberto">Aberto</option>
+                            <option value="Em andamento">Em andamento</option>
+                            <option value="Resolvido">Resolvido</option>
+                        </select>
+                    </div>
+
+                    <div class="campo-filtro">
+                        <label for="filtro-prioridade">Prioridade</label>
+                        <select id="filtro-prioridade">
+                            <option value="">Todas as prioridades</option>
+                            <option value="Baixa">Baixa</option>
+                            <option value="Média">Média</option>
+                            <option value="Alta">Alta</option>
+                        </select>
+                    </div>
+
+                    <div class="campo-filtro">
+                        <label for="filtro-categoria">Categoria</label>
+                        <select id="filtro-categoria">
+                            <option value="">Todas as categorias</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div id="lista-chamados">
+                    Carregando chamados...
+                </div>
+
+            </section>
+        </div>     
+
+
+        <!-- Janela de detalhes do chamado -->
+        <div id="modal-detalhes" class="modal">
+
+            <div class="modal-conteudo">
+
+                <div class="modal-cabecalho">
+                    <h2>Detalhes do chamado</h2>
+
+                    <button id="fechar-modal" type="button">
+                        &times;
+                    </button>
+                </div>
+
+                <div id="conteudo-detalhes">
+                    Carregando informações...
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- MODAL DE EDIÇÃO DE CHAMADO -->
+        <div id="modal-editar-chamado" class="modal">
+            <div class="modal-conteudo">
+
+                <div class="modal-cabecalho">
+                    <h2>Editar Chamado</h2>
+                    <button type="button" id="fechar-modal-editar-chamado">×</button>
+                </div>
+
+                <form id="form-editar-chamado">
+
+                    <input type="hidden" id="editar-id-chamado">
+
+                    <div class="campo">
+                        <label for="editar-titulo-chamado">Título</label>
+                        <input type="text" id="editar-titulo-chamado" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="editar-descricao-chamado">Descrição</label>
+                        <textarea id="editar-descricao-chamado" rows="4" required></textarea>
+                    </div>
+
+                    <div class="campo">
+                        <label for="editar-solicitante-chamado">Solicitante</label>
+                        <select id="editar-solicitante-chamado" required></select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="editar-categoria-chamado">Categoria</label>
+                        <select id="editar-categoria-chamado" required></select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="editar-prioridade-chamado">Prioridade</label>
+                        <select id="editar-prioridade-chamado" required>
+                            <option value="Baixa">Baixa</option>
+                            <option value="Média">Média</option>
+                            <option value="Alta">Alta</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="editar-status-chamado">Status</label>
+                        <select id="editar-status-chamado" required>
+                            <option value="Aberto">Aberto</option>
+                            <option value="Em andamento">Em andamento</option>
+                            <option value="Resolvido">Resolvido</option>
+                        </select>
+                    </div>
+
+                    <button type="submit">Salvar alterações</button>
+
+                </form>
+
+                <p id="mensagem-editar-chamado"></p>
+
+            </div>
+        </div>        
+
+        </main>
+
+    </div>
+
+    <script src="js/chart.umd.js"></script>
+    <script src="js/chamados.js"></script>
+
+</body>
+</html>
